@@ -46,7 +46,7 @@ Now, the AWS profile can be set to get access to corresponding AWS account.
 ```shell
 $ export AWS_PROFILE=dev-1
 $ aws s3 ls
-Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: :key:
+Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: 
 
 ```
 
@@ -75,11 +75,11 @@ Here is one example -
 
 ```shell
 $ aws-dev-1 aws s3 ls
-Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: :key:
+Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: 
 << This will connect to AWS account -1 >> 
 
 $ aws-dev-2 terraform init
-Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: :key:
+Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: 
 << This will connect to AWS account -2 >> 
 ```
 
@@ -117,7 +117,7 @@ Please choose from the following profile(s) :
 
  Enter profile id: 2
 2021-07-08 13:12:27,017 INFO: Found credentials in shared credentials file: ~/.aws/credentials
-Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: :key:
+Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: 
 2021-07-08 13:12:51,698 INFO: Set your profile to temp_default, export AWS_PROFILE=temp_dev-1
 
 ```
