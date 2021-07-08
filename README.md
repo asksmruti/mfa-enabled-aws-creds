@@ -1,7 +1,6 @@
 
 # AWS - cross account access using MFA 
 
----------------------------------------
 
 Multi-factor authentication(MFA) or two-factor authentication (2FA), is highly recommended for keeping the AWS accounts safe as it provides an additional layer of security for the user accounts.
 However this comes with little complexity for the developers to perform a day-to-day job. 
@@ -11,6 +10,7 @@ In the large organisations, usually the users will be provided access to MFA ena
 That is kinda gateway to login to another account by switching the role.
 
 ### AWS config file
+
 
 The MFA can be configured through AWS config and credentials file like below.
 It will allow the user to run aws cli by setting up the right profile.
@@ -52,6 +52,7 @@ Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>:
 
 ### aws-vault 
 
+
 Probably, it would be tedious and may be some difficulties while setting up the profile every time or pass the profile argument to each command.
 In those scenarios, `aws-vault plays` a nice role. 
 
@@ -84,6 +85,7 @@ Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>:
 ```
 
 ### aws_mfa_ca_credentials.py
+
 
 The above two approach will solve almost all hurdles.
 However, in both scenarios, it will not provide you the temporary credentials as such, which you may need.
@@ -118,7 +120,7 @@ Please choose from the following profile(s) :
  Enter profile id: 2
 2021-07-08 13:12:27,017 INFO: Found credentials in shared credentials file: ~/.aws/credentials
 Enter MFA code for arn:aws:iam::<main account ID>:mfa/<main account user name>: 
-2021-07-08 13:12:51,698 INFO: Set your profile to temp_default, export AWS_PROFILE=temp_dev-1
+2021-07-08 13:12:51,698 INFO: Set your profile to temp_default, export AWS_PROFILE=temp_dev-2
 
 ```
 
