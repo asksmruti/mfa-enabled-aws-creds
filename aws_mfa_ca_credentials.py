@@ -66,7 +66,7 @@ def choose_profile_option(profile_role_arn_dict: dict):
     i = input("\n Enter profile id: ")
 
     if 0 < int(i) <= len(profile_role_arn_dict):
-        profile_name = aws_profiles_list[int(i)-1]
+        profile_name = aws_profiles_list[int(i) - 1]
         role_arn = profile_role_arn_dict[profile_name]
     else:
         logging.error("Please select correct profile id")
@@ -82,12 +82,27 @@ def get_credentials_for_role(selected_aws_profile, role_arn):
     :param role_arn: role_arn
     :return: temporary session name and credentials object
     """
+    boto3.set_stream_logger('botocore', logging.CRITICAL)
     session_name = f"temp_{selected_aws_profile}"
-    session = boto3.Session(profile_name=selected_aws_profile)
-    sts = session.client('sts')
+    # To refresh the credentials
     try:
+        session = boto3.Session(profile_name=session_name)
+        sts = session.client('sts')
         response = sts.assume_role(RoleArn=role_arn,
-                                   RoleSessionName=session_name
+                                   RoleSessionName=session_name,
+                                   DurationSeconds=3600
+                                   )
+        return session_name, response['Credentials']
+    except:
+        logging.warning("Existing credentials expired")
+        pass
+    # To generate the new credentials
+    try:
+        session = boto3.Session(profile_name=selected_aws_profile)
+        sts = session.client('sts')
+        response = sts.assume_role(RoleArn=role_arn,
+                                   RoleSessionName=session_name,
+                                   DurationSeconds=3600
                                    )
         return session_name, response['Credentials']
     except ClientError as e:
